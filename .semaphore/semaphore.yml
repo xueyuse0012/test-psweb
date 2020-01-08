@@ -1,15 +1,19 @@
 version: v1.0
-name: Docker
+name: Run in Docker
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: 'semaphoreci/nodejs:10.1'
+    - name: database
+      image: 'postgres:11'
 blocks:
-  - name: Build
+  - name: Hello World
     task:
       jobs:
-        - name: docker build
+        - name: Test job
           commands:
             - checkout
-            - 'docker build -t psweg:test .'
-            - echo "Set up credentials through secret and push to your registry"
+            - echo "Hello from my 'main' container"
